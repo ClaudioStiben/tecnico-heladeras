@@ -1,5 +1,6 @@
 import AnimatedSection from '../ui/AnimatedSection';
 import { brands } from '../../data/brands';
+import { WA_LINK } from '../../data/constants';
 
 const reasons = [
   { icon: 'fas fa-user-tie',         title: 'Técnico especializado',    desc: 'Solo heladeras, sin excepciones.' },
@@ -85,6 +86,19 @@ export default function About() {
               ))}
             </div>
           </div>
+        </AnimatedSection>
+
+        {/* CTA after brands */}
+        <AnimatedSection className="text-center mt-12">
+          <a
+            href={WA_LINK}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-whatsapp hover:bg-whatsapp-dark text-white font-bold rounded-full transition-all hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(37,211,102,0.3)]"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="about-whatsapp"
+          >
+            <i className="fab fa-whatsapp text-lg" /> Consultá sin compromiso
+          </a>
         </AnimatedSection>
       </div>
     </section>

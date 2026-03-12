@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AnimatedSection from "../ui/AnimatedSection";
 import { staticReviews } from "../../data/staticReviews";
+import { WA_LINK, PHONE } from "../../data/constants";
 
 const featured = staticReviews.filter((r) => r.featured);
 const allReviews = staticReviews;
@@ -164,6 +165,26 @@ export default function Testimonials() {
             <i className="fas fa-list" />
             Ver más reseñas
           </button>
+        </AnimatedSection>
+
+        {/* CTA de conversión */}
+        <AnimatedSection className="flex flex-col sm:flex-row justify-center gap-3 mt-10">
+          <a
+            href={WA_LINK}
+            className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-whatsapp hover:bg-whatsapp-dark text-white font-bold rounded-full transition-all hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(37,211,102,0.3)]"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="testimonials-whatsapp"
+          >
+            <i className="fab fa-whatsapp text-lg" /> Escribinos por WhatsApp
+          </a>
+          <a
+            href={`tel:${PHONE}`}
+            className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 border-2 border-primary-600 text-primary-600 font-bold rounded-full hover:bg-primary-600 hover:text-white transition-all hover:-translate-y-0.5"
+            data-track="testimonials-call"
+          >
+            <i className="fas fa-phone" /> Llamar ahora
+          </a>
         </AnimatedSection>
       </div>
 

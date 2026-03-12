@@ -134,6 +134,12 @@ export default function Services() {
           </p>
         </AnimatedSection>
 
+        <AnimatedSection className="text-center mb-10">
+          <p className="text-[var(--text-muted)] text-base max-w-2xl mx-auto leading-relaxed">
+            Sabemos lo que significa que una heladera deje de funcionar. Se pierde mercadería, se genera estrés y necesitás una solución urgente.
+          </p>
+        </AnimatedSection>
+
         {/* Problem chips */}
         <AnimatedSection className="flex flex-wrap justify-center gap-3 mb-6">
           {problems.map(p => (
