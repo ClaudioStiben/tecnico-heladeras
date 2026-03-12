@@ -8,6 +8,7 @@ const reasons = [
   { icon: 'fas fa-box',              title: 'Repuestos originales',     desc: 'A bordo para reparar en la primera visita.' },
   { icon: 'fas fa-hand-holding-usd', title: 'Precio transparente',      desc: 'Presupuesto antes de empezar.' },
   { icon: 'fas fa-shield-alt',       title: 'Garantía escrita 90 días', desc: 'Si falla, volvemos sin costo.' },
+  { icon: 'fas fa-credit-card',      title: 'Todos los medios de pago', desc: 'Efectivo, Débito, Transferencia y Mercado Pago.' },
 ];
 
 export default function About() {
@@ -37,11 +38,11 @@ export default function About() {
           <AnimatedSection>
             <span className="inline-block text-primary-600 font-semibold text-sm tracking-wide uppercase mb-3">Especialización</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-5 leading-tight">
-              Especialistas en heladeras de alta gama y Side by Side
+              Especialistas en heladeras de <span className="text-primary-600">alta gama</span> y <span className="text-primary-600">Side by Side</span> en Buenos Aires
             </h2>
             <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
               No todos los técnicos trabajan con equipos complejos.
-              Nos especializamos en Side by Side y modelos de mayor tecnología,
+              Nos especializamos en <strong>Side by Side</strong> y modelos de <strong>mayor tecnología</strong>,
               con repuestos originales y diagnóstico preciso.
             </p>
           </AnimatedSection>

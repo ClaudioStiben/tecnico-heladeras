@@ -12,12 +12,14 @@ const problems = [
 ];
 
 const slides = [
-  { img: '/heladera familiar.jpg',  title: 'Heladeras Domésticas',  desc: 'Reparamos todo tipo de heladera familiar, de 1 o 2 puertas' },
-  { img: '/no frost.jpg',           title: 'Sistemas No Frost',     desc: 'Especialistas en descongelado automático y fallas de ventilador' },
-  { img: '/sbs.jpg',                title: 'Side by Side',           desc: 'Gran capacidad con puertas laterales — todas las marcas' },
-  { img: '/inverter.jpg',           title: 'Tecnología Inverter',    desc: 'Alta eficiencia energética, compresor variable' },
-  { img: '/freezer vertical.webp',  title: 'Freezers Verticales',    desc: 'Congeladores de gran capacidad para uso doméstico' },
-  { img: '/minibar.jpg',            title: 'Minibares',              desc: 'Refrigeradores compactos para oficina y hogar' },
+  { img: '/sbs-electrolux.jpeg',    title: 'Side by Side Electrolux',      desc: 'Reparación especializada en Side by Side Electrolux French Door' },
+  { img: '/sbs-ge.jpeg',            title: 'Side by Side General Electric', desc: 'Service de heladeras GE Side by Side — todas las fallas' },
+  { img: '/sbs-patrick.jpeg',       title: 'Side by Side Patrick',          desc: 'Técnico especialista en Side by Side Patrick con repuestos originales' },
+  { img: '/heladera-nofrost.jpg',   title: 'Heladera No Frost Whirlpool',  desc: 'Reparación de sistemas No Frost — descongelado automático y ventilador' },
+  { img: '/heladera-3puertas.jpg',  title: 'Heladera 3 Puertas',           desc: 'Service de heladeras de alta gama con display digital' },
+  { img: '/compresor-inverter.jpg',  title: 'Compresor Inverter',           desc: 'Diagnóstico y reparación de compresores Inverter — alta eficiencia' },
+  { img: '/freezer vertical.webp',  title: 'Freezers Verticales',          desc: 'Congeladores de gran capacidad para uso doméstico' },
+  { img: '/minibar.jpg',            title: 'Minibares',                     desc: 'Refrigeradores compactos para oficina y hogar' },
 ];
 
 function Carousel() {

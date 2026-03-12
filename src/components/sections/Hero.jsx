@@ -12,19 +12,24 @@ export default function Hero() {
 
           {/* Text */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-white/90 font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-white/90 font-medium mb-4">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
               Técnico especializado · Solo heladeras
             </div>
 
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-white/90 font-semibold mb-6 ml-0 sm:ml-3">
+              <i className="fas fa-map-marker-alt text-primary-300" />
+              CABA y Zona Norte
+            </div>
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
               ¿Tu heladera no enfría?
-              <span className="block text-primary-300 mt-2">Servicio técnico en el día.</span>
+              <span className="block text-white font-semibold mt-2">Técnico de heladeras en Buenos Aires</span>
             </h1>
 
             <p className="text-lg text-white/75 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-              Reparación de heladeras y freezers en CABA.
-              Especialistas en Side by Side y equipos de alta gama.
+              Reparación de heladeras y freezers a domicilio en CABA.
+              Especialistas en <strong className="text-white">Side by Side</strong> y equipos de <strong className="text-white">alta gama</strong>.
             </p>
 
             <ul className="flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-2 text-white/85 text-sm font-medium mb-10 justify-center lg:justify-start">
@@ -52,9 +57,9 @@ export default function Hero() {
               </a>
             </div>
 
-            <div className="flex items-center gap-2 text-white/60 text-sm justify-center lg:justify-start">
+            <div className="flex items-center gap-2 text-white/70 text-sm justify-center lg:justify-start">
               <i className="fas fa-map-marker-alt" />
-              Zona de atención: <strong className="text-white/80">{COVERAGE}</strong>
+              Zona de atención: <strong className="text-white/90">{COVERAGE}</strong>
             </div>
           </div>
 
@@ -62,12 +67,12 @@ export default function Hero() {
           <div className="relative hidden lg:flex justify-center">
             <div className="relative">
               <img
-                src="/foto-claudio.png"
-                alt="Claudio, técnico especialista en heladeras"
-                className="relative z-10 w-full max-w-md rounded-2xl"
+                src="/hero-sbs.jpeg"
+                alt="Heladera Side by Side con dispenser — service especializado en alta gama"
+                className="relative z-10 w-full max-w-md rounded-2xl shadow-2xl"
               />
               {/* Badge 1 */}
-              <div className="absolute -left-4 bottom-20 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-xl">
+              <div className="absolute -left-4 bottom-16 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-xl">
                 <span className="text-2xl">🏆</span>
                 <div>
                   <p className="font-bold text-slate-900 text-sm">+15 años</p>
@@ -75,7 +80,7 @@ export default function Hero() {
                 </div>
               </div>
               {/* Badge 2 */}
-              <div className="absolute -right-4 top-16 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-xl">
+              <div className="absolute -right-4 top-12 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-xl">
                 <span className="text-2xl">⭐</span>
                 <div>
                   <p className="font-bold text-slate-900 text-sm">4.9 / 5</p>
