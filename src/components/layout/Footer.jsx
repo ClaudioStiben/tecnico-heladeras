@@ -38,12 +38,12 @@ export default function Footer() {
           {/* Marcas */}
           <div>
             <h6 className="font-bold text-white text-sm uppercase tracking-wider mb-4">Marcas</h6>
-            <ul className="flex flex-col gap-2 text-sm">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
               {topBrands.map(b => (
                 <li key={b}>{b}</li>
               ))}
-              <li className="text-slate-500 italic">+ 27 marcas más</li>
             </ul>
+            <p className="text-slate-500 text-xs italic mt-2">+ 27 marcas más</p>
           </div>
 
           {/* Contacto */}
