@@ -2,12 +2,14 @@ import AnimatedSection from '../ui/AnimatedSection';
 
 const services = [
   {
-    icon: 'fas fa-truck',
+    img: '/camionetas.jpeg',
+    alt: 'Camionetas de Service de Heladeras CRS equipadas con repuestos',
     title: 'Unidades móviles con stock de repuestos',
     desc: 'Contamos con unidades equipadas con todos los repuestos necesarios para brindar una solución en el acto.',
   },
   {
-    icon: 'fas fa-headset',
+    img: '/atencion.jpeg',
+    alt: 'Atención al cliente de Service de Heladeras CRS',
     title: 'Atención personalizada y respuesta inmediata',
     desc: 'Coordinamos la visita en el día y brindamos un trato directo, sin intermediarios ni demoras.',
   },
@@ -36,9 +38,8 @@ export default function ServiceIntegral() {
               delay={i * 120}
               className="group relative bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl overflow-hidden hover:border-primary-400 hover:shadow-lg transition-all"
             >
-              {/* Placeholder image area */}
-              <div className="h-48 bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
-                <i className={`${s.icon} text-5xl text-primary-400 group-hover:text-primary-600 transition-colors`} />
+              <div className="h-48 overflow-hidden">
+                <img src={s.img} alt={s.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-[var(--text)] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
