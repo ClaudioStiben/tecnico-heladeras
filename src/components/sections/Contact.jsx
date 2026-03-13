@@ -1,25 +1,6 @@
 import AnimatedSection from '../ui/AnimatedSection';
 import { WA_LINK, PHONE, PHONE_DISPLAY, SCHEDULE, COVERAGE } from '../../data/constants';
 
-const barrios = [
-  { name: 'Palermo',       cx: 170, cy: 155 },
-  { name: 'Recoleta',      cx: 195, cy: 175 },
-  { name: 'Belgrano',      cx: 155, cy: 110 },
-  { name: 'Caballito',     cx: 155, cy: 215 },
-  { name: 'Almagro',       cx: 175, cy: 205 },
-  { name: 'Villa Crespo',  cx: 160, cy: 185 },
-  { name: 'Flores',        cx: 120, cy: 235 },
-  { name: 'Devoto',        cx: 95,  cy: 165 },
-  { name: 'Núñez',         cx: 155, cy: 80 },
-  { name: 'San Telmo',     cx: 210, cy: 230 },
-  { name: 'Boedo',         cx: 185, cy: 240 },
-  { name: 'Colegiales',    cx: 160, cy: 140 },
-  { name: 'Chacarita',     cx: 145, cy: 160 },
-  { name: 'Saavedra',      cx: 130, cy: 80 },
-  { name: 'Puerto Madero', cx: 230, cy: 215 },
-  { name: 'Barrio Norte',  cx: 190, cy: 190 },
-];
-
 export default function Contact() {
   return (
     <section id="contacto" className="py-16 md:py-24" style={{ background: 'var(--bg-alt)' }}>
@@ -100,56 +81,20 @@ export default function Contact() {
             </div>
           </AnimatedSection>
 
-          {/* CABA Map */}
+          {/* Google Maps */}
           <AnimatedSection className="flex flex-col gap-5">
             <h3 className="text-xl font-bold text-[var(--text)]" style={{ fontFamily: 'var(--font-heading)' }}>Zona de cobertura</h3>
-            <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 flex justify-center">
-              <svg viewBox="0 0 320 380" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
-                {/* Simplified CABA silhouette */}
-                <path
-                  d="M155,20 C140,20 120,35 105,55 C85,80 70,105 60,140 C50,175 50,200 55,230 C60,260 70,285 85,310 C100,335 120,350 145,360 C170,365 195,355 215,335 C235,310 250,280 255,245 C260,210 255,180 245,150 C235,120 220,95 205,70 C190,50 175,30 160,22 Z"
-                  fill="#eaf2f8"
-                  stroke="#1b4f72"
-                  strokeWidth="2"
-                />
-                {/* Río de la Plata indication (right edge) */}
-                <path
-                  d="M245,150 C260,160 270,180 275,205 C278,230 270,260 255,245"
-                  fill="none"
-                  stroke="#a9cce3"
-                  strokeWidth="1.5"
-                  strokeDasharray="4,3"
-                />
-
-                {/* Barrio markers */}
-                {barrios.map((b, i) => (
-                  <g key={b.name}>
-                    {/* Pulse ring */}
-                    <circle
-                      cx={b.cx} cy={b.cy} r="6"
-                      fill="none"
-                      stroke="#1b4f72"
-                      strokeWidth="1.5"
-                      opacity="0.4"
-                      style={{ animation: `pulse-dot 2s ease-in-out ${i * 0.15}s infinite` }}
-                    />
-                    {/* Dot */}
-                    <circle cx={b.cx} cy={b.cy} r="3.5" fill="#1b4f72" />
-                    {/* Label */}
-                    <text
-                      x={b.cx}
-                      y={b.cy - 10}
-                      textAnchor="middle"
-                      fill="#0e2a43"
-                      fontSize="8"
-                      fontWeight="600"
-                      fontFamily="Inter, sans-serif"
-                    >
-                      {b.name}
-                    </text>
-                  </g>
-                ))}
-              </svg>
+            <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl overflow-hidden">
+              <iframe
+                title="Zona de cobertura — Ciudad Autónoma de Buenos Aires"
+                src="https://maps.google.com/maps?ll=-34.615824,-58.433298&z=11&t=m&hl=es-419&gl=AR&mapclient=embed&q=Buenos+Aires+Cdad.+Aut%C3%B3noma+de+Buenos+Aires&output=embed"
+                width="100%"
+                height="350"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
             <div className="flex items-center gap-3 mt-2">
               <div className="flex gap-1">
