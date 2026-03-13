@@ -1,5 +1,11 @@
 import { WA_LINK, PHONE, PHONE_DISPLAY, SCHEDULE, COVERAGE } from '../../data/constants';
 
+const topBrands = [
+  'Whirlpool', 'Samsung', 'LG', 'Electrolux',
+  'Patrick', 'Bosch', 'General Electric',
+  'BGH', 'Philco', 'Gafa',
+];
+
 export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300">
@@ -33,11 +39,10 @@ export default function Footer() {
           <div>
             <h6 className="font-bold text-white text-sm uppercase tracking-wider mb-4">Marcas</h6>
             <ul className="flex flex-col gap-2 text-sm">
-              <li>Whirlpool</li>
-              <li>General Electric</li>
-              <li>Patrick</li>
-              <li>Electrolux</li>
-              <li>Bosch · Philco</li>
+              {topBrands.map(b => (
+                <li key={b}>{b}</li>
+              ))}
+              <li className="text-slate-500 italic">+ 27 marcas más</li>
             </ul>
           </div>
 

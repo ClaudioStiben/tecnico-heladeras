@@ -11,50 +11,43 @@ const reasons = [
   { icon: 'fas fa-credit-card',      title: 'Todos los medios de pago', desc: 'Efectivo, Débito, Transferencia y Mercado Pago.' },
 ];
 
+const paymentMethods = [
+  { icon: 'fas fa-money-bill-wave', label: 'Efectivo' },
+  { icon: 'fas fa-credit-card',     label: 'Débito' },
+  { icon: 'fas fa-exchange-alt',    label: 'Transferencia' },
+  { icon: 'fas fa-mobile-alt',      label: 'Mercado Pago' },
+];
+
+/* Split brands into two rows for the double marquee */
+const mid = Math.ceil(brands.length / 2);
+const row1 = brands.slice(0, mid);
+const row2 = brands.slice(mid);
+
 export default function About() {
   return (
     <section id="nosotros" className="py-16 md:py-24" style={{ background: 'var(--bg)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Hero row: photo + text */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
-          <AnimatedSection className="flex justify-center">
-            <div className="relative">
-              <img
-                src="/foto-claudio.png"
-                alt="Claudio — técnico especialista"
-                className="w-full max-w-sm rounded-2xl shadow-2xl"
-              />
-              <div className="absolute -bottom-4 -right-4 flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl px-4 py-3 shadow-lg">
-                <i className="fas fa-award text-primary-600 text-xl" />
-                <div>
-                  <p className="font-bold text-[var(--text)] text-sm">+15 años</p>
-                  <p className="text-[var(--text-muted)] text-xs">Solo heladeras</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <span className="inline-block text-primary-600 font-semibold text-sm tracking-wide uppercase mb-3">Especialización</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-5 leading-tight">
-              Especialistas en heladeras de <span className="text-primary-600">alta gama</span> y <span className="text-primary-600">Side by Side</span> en Buenos Aires
-            </h2>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
-              No todos los técnicos trabajan con equipos complejos.
-              Nos especializamos en <strong>Side by Side</strong> y modelos de <strong>mayor tecnología</strong>,
-              con repuestos originales y diagnóstico preciso.
-            </p>
-          </AnimatedSection>
-        </div>
+        {/* Intro text — no photo */}
+        <AnimatedSection className="text-center mb-16 max-w-3xl mx-auto">
+          <span className="inline-block text-primary-600 font-semibold text-sm tracking-wide uppercase mb-3">Especialización</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-5 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+            Especialistas en heladeras de <span className="text-primary-600">alta gama</span> y <span className="text-primary-600">Side by Side</span> en CABA
+          </h2>
+          <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            No todos los técnicos trabajan con equipos complejos.
+            Nos especializamos en <strong>Side by Side</strong> y modelos de <strong>mayor tecnología</strong>,
+            con repuestos originales y diagnóstico preciso.
+          </p>
+        </AnimatedSection>
 
         {/* Why choose us */}
         <AnimatedSection className="text-center mb-10">
-          <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text)] mb-3">¿Por qué elegirnos?</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text)] mb-3" style={{ fontFamily: 'var(--font-heading)' }}>¿Por qué elegirnos?</h3>
           <p className="text-[var(--text-muted)] max-w-xl mx-auto">Honestidad, seriedad y experiencia en cada trabajo</p>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
           {reasons.map((r, i) => (
             <AnimatedSection
               key={r.title}
@@ -72,18 +65,48 @@ export default function About() {
           ))}
         </div>
 
-        {/* Brands - infinite marquee */}
+        {/* Payment methods & guarantee */}
+        <AnimatedSection className="mb-20">
+          <div className="bg-primary-50 border border-primary-200 rounded-2xl p-8 text-center">
+            <h3 className="text-xl font-bold text-[var(--text)] mb-6" style={{ fontFamily: 'var(--font-heading)' }}>Medios de pago aceptados</h3>
+            <div className="flex flex-wrap justify-center gap-6 mb-6">
+              {paymentMethods.map(m => (
+                <div key={m.label} className="flex flex-col items-center gap-2">
+                  <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-white shadow-sm text-primary-600 text-xl">
+                    <i className={m.icon} />
+                  </div>
+                  <span className="text-sm font-medium text-[var(--text)]">{m.label}</span>
+                </div>
+              ))}
+            </div>
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white rounded-full border border-primary-200 text-sm font-semibold text-primary-700">
+              <i className="fas fa-shield-alt" /> Garantía escrita de 90 días en cada reparación
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Brands - double row infinite marquee */}
         <AnimatedSection className="text-center">
-          <h3 className="text-xl font-bold text-[var(--text)] mb-8">Marcas con las que trabajamos</h3>
+          <h3 className="text-xl font-bold text-[var(--text)] mb-8" style={{ fontFamily: 'var(--font-heading)' }}>Marcas con las que trabajamos</h3>
+
+          {/* Row 1 */}
+          <div className="relative overflow-hidden mb-4">
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--bg)] to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--bg)] to-transparent z-10" />
+            <div className="flex animate-[marquee_30s_linear_infinite] hover:[animation-play-state:paused] w-max">
+              {[...row1, ...row1, ...row1].map((b, i) => (
+                <BrandItem key={`r1-${b.name}-${i}`} brand={b} />
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 — reverse direction */}
           <div className="relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--bg)] to-transparent z-10" />
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--bg)] to-transparent z-10" />
-            <div className="flex animate-[marquee_20s_linear_infinite] hover:[animation-play-state:paused] w-max">
-              {[...brands, ...brands, ...brands].map((b, i) => (
-                <div key={`${b.name}-${i}`} className="flex flex-col items-center gap-2 mx-8 sm:mx-12 shrink-0">
-                  <img src={b.logo} alt={b.name} className="h-10 sm:h-14 w-auto object-contain grayscale hover:grayscale-0 transition-all" />
-                  <span className="text-xs text-[var(--text-muted)] font-medium">{b.name}</span>
-                </div>
+            <div className="flex animate-[marquee_30s_linear_infinite_reverse] hover:[animation-play-state:paused] w-max">
+              {[...row2, ...row2, ...row2].map((b, i) => (
+                <BrandItem key={`r2-${b.name}-${i}`} brand={b} />
               ))}
             </div>
           </div>
@@ -103,5 +126,22 @@ export default function About() {
         </AnimatedSection>
       </div>
     </section>
+  );
+}
+
+function BrandItem({ brand }) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-2 mx-6 sm:mx-8 shrink-0 w-24 sm:w-28">
+      <img
+        src={brand.logo}
+        alt={brand.name}
+        className="h-10 sm:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all"
+        onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}
+      />
+      <div className="hidden items-center justify-center h-10 sm:h-12 px-3 bg-primary-50 rounded-lg text-primary-700 font-bold text-xs">
+        {brand.name}
+      </div>
+      <span className="text-xs text-[var(--text-muted)] font-medium truncate max-w-full">{brand.name}</span>
+    </div>
   );
 }

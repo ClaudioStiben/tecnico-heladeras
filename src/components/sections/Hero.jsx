@@ -1,49 +1,54 @@
-import { WA_LINK, PHONE, COVERAGE } from '../../data/constants';
+import { WA_LINK, PHONE } from '../../data/constants';
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative pt-[72px] overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.1),transparent_60%)]" />
+    <section id="hero" className="relative pt-[72px] overflow-hidden bg-[var(--bg)]">
+      {/* Subtle background accent — soft gradient blob top-right */}
+      <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-bl from-primary-50 via-primary-50/40 to-transparent pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Text */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-white/90 font-medium mb-4">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              Técnico especializado · Solo heladeras
+            {/* Small badge — minimal */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-primary-50 border border-primary-200 rounded-full text-xs text-primary-700 font-semibold uppercase tracking-wide mb-5">
+              <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+              Solo heladeras · CABA
             </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-white/90 font-semibold mb-6 ml-0 sm:ml-3">
-              <i className="fas fa-map-marker-alt text-primary-300" />
-              CABA y Zona Norte
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
-              ¿Tu heladera no enfría?
-              <span className="block text-white font-semibold mt-2">Técnico de heladeras en Buenos Aires</span>
+            <h1
+              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-[var(--text)] leading-[1.08] tracking-tight mb-5"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              Técnico de Heladeras{' '}
+              <span className="text-primary-600">en CABA</span>
             </h1>
 
-            <p className="text-lg text-white/75 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-              Reparación de heladeras y freezers a domicilio en CABA.
-              Especialistas en <strong className="text-white">Side by Side</strong> y equipos de <strong className="text-white">alta gama</strong>.
+            <p className="text-xl sm:text-2xl text-[var(--text-muted)] font-light mb-5 leading-relaxed">
+              ¿Tu heladera no enfría?{' '}
+              <span className="text-[var(--text)] font-normal">Te la reparamos hoy.</span>
             </p>
 
-            <ul className="flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-2 text-white/85 text-sm font-medium mb-10 justify-center lg:justify-start">
-              {['Atención rápida a domicilio', 'Reparaciones en el acto', 'Garantía escrita de 90 días', 'Trato directo con el técnico'].map(t => (
-                <li key={t} className="flex items-center gap-2">
-                  <i className="fas fa-check text-primary-300 text-xs" /> {t}
-                </li>
-              ))}
-            </ul>
+            <p className="text-base text-[var(--text-muted)] max-w-lg mx-auto lg:mx-0 mb-6 leading-relaxed">
+              Reparación a domicilio de heladeras y freezers.
+              Especialistas en <strong className="text-[var(--text)]">Side by Side</strong> y equipos de <strong className="text-[var(--text)]">alta gama</strong>.
+            </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6">
+            {/* Checkmarks — clean horizontal */}
+            <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-[var(--text-muted)] font-medium mb-6 justify-center lg:justify-start">
+              {['Atención en el día', 'Repuestos a bordo', 'Garantía escrita 90 días'].map(t => (
+                <span key={t} className="flex items-center gap-1.5">
+                  <i className="fas fa-check text-primary-500 text-xs" /> {t}
+                </span>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
               <a
                 href={WA_LINK}
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-whatsapp hover:bg-whatsapp-dark text-white font-bold rounded-full text-lg transition-all hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(37,211,102,0.4)]"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-whatsapp hover:bg-whatsapp-dark text-white font-bold rounded-full text-lg transition-all hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(37,211,102,0.35)]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -51,37 +56,38 @@ export default function Hero() {
               </a>
               <a
                 href={`tel:${PHONE}`}
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-full text-lg border-2 border-white/30 hover:border-white/60 transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-full text-lg transition-all hover:-translate-y-0.5"
               >
                 <i className="fas fa-phone" /> Llamar ahora
               </a>
-            </div>
-
-            <div className="flex items-center gap-2 text-white/70 text-sm justify-center lg:justify-start">
-              <i className="fas fa-map-marker-alt" />
-              Zona de atención: <strong className="text-white/90">{COVERAGE}</strong>
             </div>
           </div>
 
           {/* Photo */}
           <div className="relative hidden lg:flex justify-center">
             <div className="relative">
+              {/* Decorative circle behind image */}
+              <div className="absolute -inset-6 bg-primary-100/60 rounded-full blur-3xl" />
               <img
                 src="/hero-sbs.jpeg"
                 alt="Heladera Side by Side con dispenser — service especializado en alta gama"
-                className="relative z-10 w-full max-w-md rounded-2xl shadow-2xl"
+                className="relative z-10 w-full max-w-xs max-h-[350px] object-cover rounded-2xl shadow-lg"
               />
               {/* Badge 1 */}
-              <div className="absolute -left-4 bottom-16 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-xl">
-                <span className="text-2xl">🏆</span>
+              <div className="absolute -left-6 bottom-16 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md border border-slate-100">
+                <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-50 text-primary-600">
+                  <i className="fas fa-award text-lg" />
+                </div>
                 <div>
                   <p className="font-bold text-slate-900 text-sm">+15 años</p>
                   <p className="text-slate-500 text-xs">Solo heladeras</p>
                 </div>
               </div>
               {/* Badge 2 */}
-              <div className="absolute -right-4 top-12 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-xl">
-                <span className="text-2xl">⭐</span>
+              <div className="absolute -right-6 top-12 z-20 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md border border-slate-100">
+                <div className="flex gap-0.5 text-stars text-sm">
+                  {'★★★★★'.split('').map((s, i) => <span key={i}>{s}</span>)}
+                </div>
                 <div>
                   <p className="font-bold text-slate-900 text-sm">4.9 / 5</p>
                   <p className="text-slate-500 text-xs">+200 reseñas</p>
@@ -92,12 +98,19 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Wave */}
-      <div className="relative -mb-px">
-        <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,30 C240,55 480,5 720,30 C960,55 1200,5 1440,30 L1440,60 L0,60 Z" fill="var(--bg)" />
-        </svg>
+      {/* Scroll-down indicator */}
+      <div className="flex justify-center pb-4">
+        <a
+          href="#servicios"
+          className="animate-bounce text-primary-400 hover:text-primary-600 transition-colors"
+          aria-label="Ver más"
+        >
+          <i className="fas fa-chevron-down text-2xl" />
+        </a>
       </div>
+
+      {/* Soft divider line instead of heavy wave */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[var(--border)] to-transparent" />
     </section>
   );
 }

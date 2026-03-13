@@ -1,7 +1,9 @@
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
+import ScrollToTop from "./components/layout/ScrollToTop";
 import Hero from "./components/sections/Hero";
+import ServiceIntegral from "./components/sections/ServiceIntegral";
 import Services from "./components/sections/Services";
 import HowWeWork from "./components/sections/HowWeWork";
 import About from "./components/sections/About";
@@ -16,6 +18,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <ServiceIntegral />
         <Services />
         <Urgency />
         <About />
@@ -26,6 +29,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <ScrollToTop />
     </>
   );
 }
