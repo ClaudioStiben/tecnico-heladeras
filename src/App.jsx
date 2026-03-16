@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
@@ -11,22 +12,44 @@ import Testimonials from "./components/sections/Testimonials";
 import Urgency from "./components/sections/Urgency";
 import Contact from "./components/sections/Contact";
 import FinalCTA from "./components/sections/FinalCTA";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 
 export default function App() {
+  const [page, setPage] = useState(window.location.hash === "#privacidad" ? "privacy" : "home");
+
+  useEffect(() => {
+    const onHashChange = () => {
+      if (window.location.hash === "#privacidad") {
+        setPage("privacy");
+        window.scrollTo(0, 0);
+      } else if (page === "privacy") {
+        setPage("home");
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [page]);
+
   return (
     <>
       <Header />
-      <main>
-        <Hero />
-        <ServiceIntegral />
-        <Services />
-        <Urgency />
-        <About />
-        <Testimonials />
-        <HowWeWork />
-        <Contact />
-        <FinalCTA />
-      </main>
+      {page === "privacy" ? (
+        <main>
+          <PrivacyPolicy />
+        </main>
+      ) : (
+        <main>
+          <Hero />
+          <ServiceIntegral />
+          <Services />
+          <Urgency />
+          <About />
+          <Testimonials />
+          <HowWeWork />
+          <Contact />
+          <FinalCTA />
+        </main>
+      )}
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />

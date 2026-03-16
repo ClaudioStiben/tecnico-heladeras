@@ -60,8 +60,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
+        {/* Aviso Legal */}
+        <div className="mt-10 pt-8 border-t border-slate-800">
+          <p className="text-xs text-slate-500 leading-relaxed max-w-4xl mx-auto text-center">
+            <span className="font-semibold text-slate-400">Aviso Legal:</span> Cada una de las marcas y/o logotipos
+            mencionados en este sitio web son a título figurativo; pertenecen a sus respectivos propietarios.
+            Este sitio no manifiesta como propias ninguna de las marcas aquí mencionadas.
+          </p>
+        </div>
+
+        {/* Copyright + Links */}
+        <div className="mt-6 pt-6 border-t border-slate-800 text-center text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
           <p>&copy; {new Date().getFullYear()} Service de Heladeras CRS. Todos los derechos reservados.</p>
+          <span className="hidden sm:inline">|</span>
+          <a href="#privacidad" className="hover:text-white transition-colors underline underline-offset-2">
+            Política de Privacidad
+          </a>
         </div>
       </div>
     </footer>
