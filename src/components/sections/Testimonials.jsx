@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import AnimatedSection from "../ui/AnimatedSection";
-import { staticReviews } from "../../data/staticReviews";
 import { WA_LINK, PHONE } from "../../data/constants";
-
-const featured = staticReviews.filter((r) => r.featured);
-const allReviews = staticReviews;
+import { useAuth } from "../../context/useAuth";
+import { useUI } from "../../context/useUI";
+import { fetchLatestReviews } from "../../services/reviews";
 
 const colors = [
   "#2563eb",
@@ -17,18 +16,18 @@ const colors = [
   "#14b8a6",
 ];
 
-function getColor(name) {
+function getColor(name = "") {
   let hash = 0;
   for (let i = 0; i < name.length; i++)
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   return colors[Math.abs(hash) % colors.length];
 }
 
-function Stars() {
+function Stars({ count = 5 }) {
   return (
-    <div className="flex gap-0.5" aria-label="5 de 5 estrellas">
+    <div className="flex gap-0.5" aria-label={`${count} de 5 estrellas`}>
       {[1, 2, 3, 4, 5].map((s) => (
-        <i key={s} className="fas fa-star text-sm text-stars" />
+        <i key={s} className={`fas fa-star text-sm ${s <= count ? "text-stars" : "text-slate-300"}`} />
       ))}
     </div>
   );
@@ -37,7 +36,7 @@ function Stars() {
 function ReviewCard({ review }) {
   return (
     <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 h-full flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-      <Stars />
+      <Stars count={review.rating} />
       <p className="text-[var(--text)] text-sm leading-relaxed mt-4 mb-6 flex-1">
         &ldquo;{review.comment}&rdquo;
       </p>
@@ -46,7 +45,7 @@ function ReviewCard({ review }) {
           className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
           style={{ backgroundColor: getColor(review.name) }}
         >
-          {review.name.charAt(0).toUpperCase()}
+          {(review.name || "?").charAt(0).toUpperCase()}
         </div>
         <span className="font-semibold text-sm text-[var(--text)]">
           {review.name}
@@ -56,80 +55,48 @@ function ReviewCard({ review }) {
   );
 }
 
-function ReviewsModal({ isOpen, onClose }) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
+function SkeletonCard() {
   return (
-    <div className="fixed inset-0 z-[9000] flex items-start justify-center p-4 pt-[72px] sm:pt-20">
-      <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      <div className="relative bg-[var(--bg)] rounded-2xl shadow-2xl w-full max-w-3xl max-h-[calc(100vh-100px)] overflow-hidden flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--border)] shrink-0">
-          <div>
-            <h3 className="text-lg font-bold text-[var(--text)]">
-              Todas las reseñas
-            </h3>
-            <p className="text-sm text-[var(--text-muted)]">
-              {allReviews.length} reseñas — todas con 5 estrellas
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
-            aria-label="Cerrar"
-          >
-            <i className="fas fa-times text-lg" />
-          </button>
-        </div>
-
-        {/* Reviews list */}
-        <div className="overflow-y-auto p-6 flex flex-col gap-4">
-          {allReviews.map((r) => (
-            <div
-              key={r.id}
-              className="flex gap-4 p-4 bg-[var(--bg-alt)] rounded-xl"
-            >
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 mt-0.5"
-                style={{ backgroundColor: getColor(r.name) }}
-              >
-                {r.name.charAt(0).toUpperCase()}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 mb-1">
-                  <span className="font-semibold text-sm text-[var(--text)]">
-                    {r.name}
-                  </span>
-                  <Stars />
-                </div>
-                <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  {r.comment}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 h-full flex flex-col animate-pulse">
+      <div className="h-3 w-24 bg-slate-200 rounded mb-4" />
+      <div className="h-3 bg-slate-200 rounded mb-2" />
+      <div className="h-3 bg-slate-200 rounded mb-2 w-11/12" />
+      <div className="h-3 bg-slate-200 rounded mb-6 w-8/12" />
+      <div className="flex items-center gap-3 pt-4 border-t border-[var(--border)]">
+        <div className="w-10 h-10 rounded-full bg-slate-200" />
+        <div className="h-3 w-28 bg-slate-200 rounded" />
       </div>
     </div>
   );
 }
 
 export default function Testimonials() {
-  const [showModal, setShowModal] = useState(false);
+  const { user } = useAuth();
+  const { openReview, openLogin, openAllReviews, reviewsVersion } = useUI();
+  const [latest, setLatest] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(false);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setErr(false);
+    try {
+      const items = await fetchLatestReviews(3);
+      setLatest(items);
+    } catch {
+      setErr(true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { load(); }, [load, reviewsVersion]);
+
+  const handleLeaveReview = () => {
+    if (user) openReview();
+    else openLogin();
+  };
 
   return (
     <section
@@ -149,26 +116,52 @@ export default function Testimonials() {
 
         {/* Featured 3 */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {featured.map((r, i) => (
-            <AnimatedSection key={r.id} delay={i * 100}>
-              <ReviewCard review={r} />
-            </AnimatedSection>
-          ))}
+          {loading ? (
+            [0, 1, 2].map((i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <SkeletonCard />
+              </AnimatedSection>
+            ))
+          ) : err ? (
+            <div className="col-span-full text-center text-[var(--text-muted)] py-8">
+              No pudimos cargar las reseñas.{" "}
+              <button onClick={load} className="text-primary-600 font-semibold hover:underline">
+                Reintentar
+              </button>
+            </div>
+          ) : latest.length === 0 ? (
+            <div className="col-span-full text-center text-[var(--text-muted)] py-8">
+              Todavía no hay reseñas. ¡Sé el primero!
+            </div>
+          ) : (
+            latest.map((r, i) => (
+              <AnimatedSection key={r.id} delay={i * 100}>
+                <ReviewCard review={r} />
+              </AnimatedSection>
+            ))
+          )}
         </div>
 
-        {/* Ver todas */}
-        <AnimatedSection className="text-center mt-10">
+        {/* Acciones reseñas */}
+        <AnimatedSection className="flex flex-col sm:flex-row justify-center gap-3 mt-10">
           <button
-            onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary-600 text-primary-600 font-bold rounded-full hover:bg-primary-600 hover:text-white transition-all"
+            onClick={handleLeaveReview}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-full transition-all hover:-translate-y-0.5"
+          >
+            <i className="fas fa-pen" />
+            Dejá tu reseña
+          </button>
+          <button
+            onClick={openAllReviews}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary-600 text-primary-600 font-bold rounded-full hover:bg-primary-600 hover:text-white transition-all"
           >
             <i className="fas fa-list" />
-            Ver más reseñas
+            Ver todas las reseñas
           </button>
         </AnimatedSection>
 
         {/* CTA de conversión */}
-        <AnimatedSection className="flex flex-col sm:flex-row justify-center gap-3 mt-10">
+        <AnimatedSection className="flex flex-col sm:flex-row justify-center gap-3 mt-6">
           <a
             href={WA_LINK}
             className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-whatsapp hover:bg-whatsapp-dark text-white font-bold rounded-full transition-all hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(37,211,102,0.3)]"
@@ -187,8 +180,6 @@ export default function Testimonials() {
           </a>
         </AnimatedSection>
       </div>
-
-      <ReviewsModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </section>
   );
 }

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { WA_LINK } from '../../data/constants';
+import { useAuth } from '../../context/useAuth';
+import { useUI } from '../../context/useUI';
 
 const navLinks = [
   { href: '#servicios', label: 'Servicios' },
@@ -12,6 +14,8 @@ const navLinks = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, signOut } = useAuth();
+  const { openRegister, openLogin } = useUI();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -25,6 +29,7 @@ export default function Header() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+  const firstName = (user?.displayName || user?.email || '').split(' ')[0].split('@')[0];
 
   return (
     <header
@@ -56,6 +61,28 @@ export default function Header() {
               {label}
             </a>
           ))}
+
+          {user ? (
+            <div className="ml-2 flex items-center gap-2">
+              <span className="text-sm font-semibold text-slate-700 max-w-[140px] truncate" title={user.displayName || user.email}>
+                <i className="fas fa-user-circle mr-1.5 text-primary-600" />{firstName}
+              </span>
+              <button
+                onClick={signOut}
+                className="px-3 py-1.5 text-sm font-semibold text-slate-600 hover:text-red-600 rounded-lg transition-colors"
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={openRegister}
+              className="ml-2 inline-flex items-center gap-2 px-4 py-2 border border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white text-sm font-semibold rounded-full transition-all"
+            >
+              <i className="fas fa-user-plus" /> Crear cuenta
+            </button>
+          )}
+
           <a
             href={WA_LINK}
             className="ml-2 inline-flex items-center gap-2 px-4 py-2 bg-whatsapp hover:bg-whatsapp-dark text-white text-sm font-semibold rounded-full transition-all hover:-translate-y-0.5"
@@ -103,6 +130,42 @@ export default function Header() {
                 </a>
               </li>
             ))}
+
+            {user ? (
+              <>
+                <li className="mt-2 px-4 py-2 text-sm font-semibold text-slate-700">
+                  <i className="fas fa-user-circle mr-1.5 text-primary-600" />{user.displayName || user.email}
+                </li>
+                <li>
+                  <button
+                    onClick={() => { signOut(); closeMenu(); }}
+                    className="w-full text-left block px-4 py-3 text-base font-medium text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+                  >
+                    <i className="fas fa-sign-out-alt mr-2" /> Cerrar sesión
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button
+                    onClick={() => { openRegister(); closeMenu(); }}
+                    className="w-full text-left block px-4 py-3 text-base font-medium text-primary-700 hover:bg-primary-50 rounded-xl transition-colors"
+                  >
+                    <i className="fas fa-user-plus mr-2" /> Crear cuenta
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => { openLogin(); closeMenu(); }}
+                    className="w-full text-left block px-4 py-3 text-base font-medium text-slate-700 hover:bg-primary-50 rounded-xl transition-colors"
+                  >
+                    <i className="fas fa-sign-in-alt mr-2" /> Iniciar sesión
+                  </button>
+                </li>
+              </>
+            )}
+
             <li className="mt-2">
               <a
                 href={WA_LINK}

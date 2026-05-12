@@ -13,6 +13,9 @@ import Urgency from "./components/sections/Urgency";
 import Contact from "./components/sections/Contact";
 import FinalCTA from "./components/sections/FinalCTA";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import { LoginModal, RegisterModal } from "./components/auth/AuthModals";
+import ReviewModal from "./components/reviews/ReviewModal";
+import AllReviewsModal from "./components/reviews/AllReviewsModal";
 
 export default function App() {
   const [page, setPage] = useState(window.location.hash === "#privacidad" ? "privacy" : "home");
@@ -53,6 +56,10 @@ export default function App() {
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
+      <LoginModal />
+      <RegisterModal />
+      <ReviewModal />
+      <AllReviewsModal />
     </>
   );
 }

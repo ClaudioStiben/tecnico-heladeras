@@ -27,12 +27,14 @@ export default function Hero() {
 
             <p className="text-xl sm:text-2xl text-[var(--text-muted)] font-light mb-5 leading-relaxed">
               ¿Tu heladera no enfría?{' '}
-              <span className="text-[var(--text)] font-normal">Te la reparamos hoy.</span>
+              <span className="text-[var(--text)] font-normal">La reparamos en el día.</span>
             </p>
 
             <p className="text-base text-[var(--text-muted)] max-w-lg mx-auto lg:mx-0 mb-6 leading-relaxed">
-              Reparación a domicilio de heladeras y freezers.
-              Especialistas en <strong className="text-[var(--text)]">Side by Side</strong> y equipos de <strong className="text-[var(--text)]">alta gama</strong>.
+              Reparación a domicilio de heladeras y freezers en CABA.
+              Trabajamos tanto con equipos convencionales como con heladeras <strong className="text-[var(--text)]">Side by Side</strong> y de <strong className="text-[var(--text)]">alta gama</strong>.
+              <br /><br />
+              Especialistas en sistemas <strong className="text-[var(--text)]">no frost</strong> y equipos de última generación (<strong className="text-[var(--text)]">inverter</strong>), con atención personalizada y soluciones rápidas para todo tipo de marcas y modelos.
             </p>
 
             {/* Checkmarks — clean horizontal */}
