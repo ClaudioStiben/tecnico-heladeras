@@ -46,7 +46,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2 text-sm">
               <li>
                 <a href={`tel:${PHONE}`} className="hover:text-white transition-colors">
-                  +54 9 {PHONE_DISPLAY}
+                  {PHONE_DISPLAY}
                 </a>
               </li>
               <li>

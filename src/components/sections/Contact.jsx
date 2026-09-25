@@ -36,7 +36,7 @@ export default function Contact() {
                 <div>
                   <p className="font-bold text-[var(--text)]">Teléfono</p>
                   <a href={`tel:${PHONE}`} className="text-[var(--text-muted)] text-sm hover:text-primary-600 transition-colors">
-                    +54 9 {PHONE_DISPLAY}
+                    {PHONE_DISPLAY}
                   </a>
                 </div>
               </div>
